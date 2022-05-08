@@ -1,4 +1,4 @@
-package com.wellsfargo.qart.estock.exceptionTests;
+package com.wellsfargo.qart.estock.tests;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

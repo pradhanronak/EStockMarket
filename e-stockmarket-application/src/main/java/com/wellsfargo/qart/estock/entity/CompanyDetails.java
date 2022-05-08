@@ -37,7 +37,7 @@ public class CompanyDetails implements Serializable {
 
 	@OneToMany(cascade = { CascadeType.MERGE })
 	@JoinColumn(name = "companyCode")
-	private Set<StockPriceDetails> StockPriceDetails;
+	private Set<StockPriceDetails> stockPriceDetails;
 
 	public CompanyDetails(Long companyCode, String stockExchange, String companyName, String companyCEO,
 			Double turnover, String boardOfDirectors, String companyProfile) {

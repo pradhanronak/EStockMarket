@@ -1,9 +1,12 @@
 package com.wellsfargo.qart.estock.services.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.wellsfargo.qart.estock.dto.CompanyDetailsDTO;
 import com.wellsfargo.qart.estock.entity.CompanyDetails;
@@ -41,6 +44,12 @@ public class CompanyServiceImpl implements CompanyService {
 				() -> new CompanyNotFoundException("Company with company code [" + companyCode + "] not found."));
 
 		return DtoEntityUtils.convertToCompanyDetailsDTO(companyDetails);
+	}
+	
+	@Override
+	public List<CompanyDetailsDTO> getAllCompanies() {
+		List<CompanyDetails> companyDetailsList = repository.findAll();
+		return DtoEntityUtils.convertToCompanyDetailsDtoList(companyDetailsList);
 	}
 
 }

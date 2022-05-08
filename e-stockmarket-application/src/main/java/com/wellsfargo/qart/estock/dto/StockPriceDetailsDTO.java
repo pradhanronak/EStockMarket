@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StockPriceDetailsDTO {
 
-	private Long Id;
+	private Long id;
 
 	@NotNull
 	@Min(value = 1, message = "CompanyCode should not be less than 1")

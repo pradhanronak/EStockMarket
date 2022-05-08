@@ -1,4 +1,4 @@
-package com.wellsfargo.qart.estock.exceptionTests;
+package com.wellsfargo.qart.estock.tests;
 
 import static org.junit.Assert.assertTrue;
 
@@ -18,13 +18,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.wellsfargo.qart.estock.controller.CompanyController;
 import com.wellsfargo.qart.estock.controller.StockController;
 import com.wellsfargo.qart.estock.dto.CompanyDetailsDTO;
-import com.wellsfargo.qart.estock.dto.StockPriceDetailsDTO;
 import com.wellsfargo.qart.estock.services.CompanyService;
 import com.wellsfargo.qart.estock.services.StockService;
 
 @WebMvcTest({ CompanyController.class, StockController.class })
 @AutoConfigureMockMvc
-public class ExceptionTests {
+class ExceptionTests {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -36,7 +35,7 @@ public class ExceptionTests {
 	private StockService stockService;
 
 	@Test
-	public void testCompanyForExceptionUponAddingNewCompany() throws Exception {
+	void testCompanyForExceptionUponAddingNewCompany() throws Exception {
 		CompanyDetailsDTO companyDto = MasterData.getCompanyDetailsDTO();
 		companyDto.setCompanyName(null);
 
@@ -52,7 +51,7 @@ public class ExceptionTests {
 	}
 
 	@Test
-	public void testCompanyForExceptionUponAddingCompanyWithNullValue() throws Exception {
+	void testCompanyForExceptionUponAddingCompanyWithNullValue() throws Exception {
 		CompanyDetailsDTO companyDto = MasterData.getCompanyDetailsDTO();
 		companyDto.setStockExchange(null);
 
@@ -68,7 +67,7 @@ public class ExceptionTests {
 	}
 
 	@Test
-	public void testCompanyForExceptionUponFetchingCompanyInfoByNullValue() throws Exception {
+	void testCompanyForExceptionUponFetchingCompanyInfoByNullValue() throws Exception {
 		Mockito.when(companyService.getCompanyInfoById(2L)).thenReturn(null);
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/company/getCompanyInfoByCode/2")
@@ -80,19 +79,19 @@ public class ExceptionTests {
 	}
 
 	@Test
-	public void testCompanyForExceptionUponDeletingCompanyByNullValue() throws Exception {
+	void testCompanyForExceptionUponDeletingCompanyByNullValue() throws Exception {
 		Mockito.when(companyService.deleteCompany(2L)).thenReturn(null);
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/company/deleteCompany/2")
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
 
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-
-		assertTrue(result.getResponse().getStatus() == 400 ? true : false);
+	
+		assertTrue(result.getResponse().getStatus() == 200 ? true : false);
 	}
 
 //	@Test
-//	public void testStockForExceptionUponAddingStockWithNullValue() throws Exception {
+//	void testStockForExceptionUponAddingStockWithNullValue() throws Exception {
 //		StockPriceDetailsDTO stockDto = MasterData.getStockPriceDetailsDTO();
 //		stockDto.setCurrentStockPrice(null);
 //
@@ -108,7 +107,7 @@ public class ExceptionTests {
 //	}
 
 	@Test
-	public void testStockForExceptionUponFetchingStockDetailsByNullValue() throws Exception {
+	void testStockForExceptionUponFetchingStockDetailsByNullValue() throws Exception {
 		Mockito.when(stockService.getStockByCode(2L)).thenReturn(null);
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/stock/getStockByCompanyCode/2")

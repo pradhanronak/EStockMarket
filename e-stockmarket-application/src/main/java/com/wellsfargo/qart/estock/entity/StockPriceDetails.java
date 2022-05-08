@@ -27,7 +27,7 @@ public class StockPriceDetails implements Serializable {
 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@javax.persistence.Id
-	private Long Id;
+	private Long id;
 
 	private Long companyCode;
 
